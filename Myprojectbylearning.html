@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random user Generator</title>
+</head>
+<body>
+    <div>
+        <h1>Random user Generator</h1>
+        <div id="user"></div>
+        <button onclick="fetchData()">Get User</button>
+    </div>
+    <script>
+        let userComtainer = document.getElementById('user');
+        async function fetchData(){
+            let response = await fetch('https://randomuser.me/api/');
+            let data = await response.json();
+            let user = data.results[0];
+            userComtainer.innerHTML = `
+                <img src="${user.picture.large}" alt="User Picture">
+                <h2>${user.name.first} ${user.name.last}</h2>
+                <p>Email: ${user.email}</p>
+                <p>Location: ${user.location.city}, ${user.location.country}</p>
+            `;
+
+        }
+    </script>
+</body>
+</html>
